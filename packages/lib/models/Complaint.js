@@ -1,0 +1,1 @@
+/* Model to represent an individual complaint. */
