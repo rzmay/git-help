@@ -1,0 +1,16 @@
+{
+  "name": "worker",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "dev": "doppler run -- nodemon index.js"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bull": "^4.8.4",
+    "lodash": "^4.17.21",
+    "lib": "*",
+    "throng": "^5.0.0"
+  }
+}
