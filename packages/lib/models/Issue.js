@@ -19,6 +19,30 @@ const issueSchema = new mongoose.Schema({
     required: true,
     immutable: true,
     validate: (v) => Account.exists({ _id: v }),
+  },
+  title: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  tags: {
+    urgency: {
+      type: String,
+      enum: ['low', 'medium', 'critical'],
+    },
+    type: {
+      type: String,
+      enum: ['bug', 'feature', 'improvement']
+    },
+    estimated_implementation_time: {
+      type: String,
+      enum: ['day', 'week', '2 weeks', 'month']
+    },
+    impact: {
+      type: String,
+      enum: ['minimal', 'medium', 'wide']
+    }
   }
 });
 
