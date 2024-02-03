@@ -1,9 +1,9 @@
 const bundleAnalyzer = require('@next/bundle-analyzer');
-const transpileModules = require('next-transpile-modules');
+// const transpileModules = require('next-transpile-modules');
 const withPlugins = require('./src/helpers/withPlugins');
 
 module.exports = withPlugins([
-  transpileModules(['shared']),
+  // transpileModules(['shared']),
   bundleAnalyzer({ enabled: process.env.ANALYZE === 'true' }),
 ], {
   // swcMinify: true,

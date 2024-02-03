@@ -1,0 +1,31 @@
+/* styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles */
+:root {
+  --color-primary: #63b3ed; /* Light blue shade */
+  --color-primary-light: #90cdf4; /* Lighter blue shade */
+  --color-primary-dark: #4299e1; /* Darker blue shade */
+}
+
+/* Apply custom colors */
+html {
+  --tw-text-opacity: 1;
+  color: rgba(55, 65, 81, var(--tw-text-opacity)); /* Default text color */
+}
+
+body {
+  background-color: var(--color-primary-light); /* Light blue background */
+  color: var(--color-primary-dark); /* Darker blue text */
+}
+
+a {
+  color: var(--color-primary); /* Primary blue links */
+  &:hover {
+    color: var(--color-primary-dark); /* Darker blue on hover */
+  }
+}
+
+/* Additional custom styles can be added here */
