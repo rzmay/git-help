@@ -1,5 +1,8 @@
+import dayjs from 'lib/dayjs';
 import React from 'react';
+import useAPI from '../hooks/useAPI';
 import useLogin from '../hooks/useLogin';
+<<<<<<< HEAD
 import useAPI from '../hooks/useAPI'
 import dayjs from 'lib/dayjs'
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue } from "@nextui-org/react";
@@ -9,13 +12,13 @@ const statusColorMap = {
   paused: "danger",
   vacation: "warning",
 };
+=======
+>>>>>>> 6c4d9962f8cfc36813787c7d134199ab7d54a8ae
 
 export default function Dashboard() {
   useLogin();
 
-  const { data: issues, error, loading } = useAPI('/v1/issues',);
-
-  console.log(issues);
+  const { data: issues, error, loading } = useAPI('/v1/issues');
 
   if (loading) return <div>Please login before accessing the dashboard</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -75,8 +78,13 @@ export default function Dashboard() {
           </thead>
           <tbody>
             {issues.map((issue) => (
+<<<<<<< HEAD
               <tr key={issue.id} className="border-b hover:bg-gray-50">
                 <td className="px-4 py-2 ">{dayjs(issue.created).format("LLL")}</td>
+=======
+              <tr key={issue.id} className="border-b">
+                <td className="px-4 py-2">{dayjs(issue.created).format('LLL')}</td>
+>>>>>>> 6c4d9962f8cfc36813787c7d134199ab7d54a8ae
                 <td className="px-4 py-2">{issue.number}</td>
                 <td className="px-4 py-2">{issue.complaints}</td>
                 <td className="px-4 py-2">{issue.title}</td>

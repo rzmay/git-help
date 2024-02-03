@@ -1,10 +1,8 @@
 import React from 'react';
+import { CopyBlock, dracula } from 'react-code-blocks';
 import useAJAX from '../hooks/useAJAX';
-import useLogin from '../hooks/useLogin';
-import Code from '../components/Code2';
 import useAccount from '../hooks/useAccount';
-import { CopyBlock, dracula } from "react-code-blocks";
-
+import useLogin from '../hooks/useLogin';
 
 export default function QuickStart() {
   useLogin(true);
@@ -16,8 +14,7 @@ export default function QuickStart() {
   if (loading) return <div>Please login before accessing the dashboard</div>;
   if (error) return <div>Error: {error.message}</div>;
   // Ensure that user and accountKey are defined before using them
-  const scriptCode =
-    `<script src="http://localhost:7000/embed/?key=${account.public_key}&user={USER_ID}"></script>
+  const scriptCode = `<script src="http://localhost:7000/embed/?key=${account.public_key}&user={USER_ID}"></script>
 <script src="http://localhost:7000/embed/css"></script>`;
 
   return (
@@ -39,8 +36,8 @@ export default function QuickStart() {
             <div>
               <CopyBlock
                 text={scriptCode}
-                language='python'
-                showLineNumbers='true'
+                language="python"
+                showLineNumbers="true"
                 wrapLines
                 theme={dracula}
               />
@@ -48,7 +45,7 @@ export default function QuickStart() {
           </div>
         </li>
       </ul>
-      <br></br>
+      <br />
       <p>And it's as simple as that! You've now successfully added the GitHelp application into your website. Now you can wait for your both your database and GitHub to populate with user feedback.</p>
     </div>
   );
