@@ -1,4 +1,8 @@
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const express = require('express');
+const useragent = require('express-useragent');
+const helmet = require('helmet');
 const mongoose = require('lib/mongoose');
 const redis = require('lib/redis');
 const morgan = require('morgan');
@@ -21,6 +25,13 @@ async function start() {
 
   app.set('trust proxy', !dev);
   app.disable('x-powered-by');
+
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(helmet());
+  app.use(cors());
+  app.use(cookieParser());
+  app.use(useragent.express());
 
   // Set up routers
   app.use('/auth', require('./src/routes/auth'));

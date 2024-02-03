@@ -19,6 +19,14 @@ router.post('/account', user(), async (req, res, next) => {
   }
 });
 
+router.get('/account', auth(), async (req, res, next) => {
+  try {
+    res.send(res.locals.account);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/account/github', auth(), async (req, res, next) => {
   try {
     res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&state=${res.locals.account.id}`);

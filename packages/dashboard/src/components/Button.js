@@ -1,4 +1,4 @@
-import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons/faSpinnerThird';
+import { faBuffer } from '@fortawesome/free-brands-svg-icons/faBuffer';
 import clsx from 'clsx';
 import Color from 'color';
 import PropTypes from 'prop-types';
@@ -23,7 +23,7 @@ export default function Button({
   shortcut,
   ...props
 }) {
-  if (loading) icon = faSpinnerThird;
+  if (loading) icon = faBuffer;
   if (color) variant = null;
 
   return (
