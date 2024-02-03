@@ -1,4 +1,6 @@
 const express = require('express');
+const fs = require('fs');
+const status = require('http-status');
 const Complaint = require('lib/models/Complaint');
 const Issue = require('lib/models/Issue');
 const embed = require('../middlewares/embed');
@@ -9,10 +11,23 @@ router.get('/', async (req, res, next) => {
   try {
     const { key } = req.query;
 
-    // Generate the js...
-    const jsPlaceholder = '';
+    if (!key) return res.sendStatus(status.BAD_REQUEST);
 
-    res.send(jsPlaceholder);
+    fs.readFile('../embed/index.js', 'utf8', (err, data) => {
+      if (err) {
+        console.error('Error reading the JavaScript file:', err);
+        return res.status(500).send('An error occurred');
+      }
+
+      // Append the dynamic line to the file contents
+      const modifiedData = `${data}\nconst githelp_accountPublicKey = "${key}";\n`;
+
+      // Set the Content-Type to JavaScript
+      res.setHeader('Content-Type', 'application/javascript');
+
+      // Send the modified JavaScript content
+      res.send(modifiedData);
+    });
   } catch (err) {
     next(err);
   }
@@ -20,7 +35,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/css', async (req, res, next) => {
   try {
-    res.sendFile('../embed/embed.css');
+    res.sendFile('../embed/styles.css');
   } catch (err) {
     next(err);
   }
