@@ -1,4 +1,5 @@
 const { nanoid } = require('nanoid');
+const slugify = require('slugify');
 const mongoose = require('../mongoose');
 const User = require('./User');
 
@@ -17,6 +18,10 @@ const accountSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+  },
+  public_key: {
+    type: String,
+    default() { return `${slugify(this.name)}-${nanoid()}`; },
   },
   created: {
     type: Date,

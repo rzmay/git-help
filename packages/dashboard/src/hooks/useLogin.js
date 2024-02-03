@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import useUser from './useUser';
 
-export default function useLogin() {
+export default function useLogin(requireAccount) {
   const router = useRouter();
   const user = useUser();
 
@@ -10,5 +10,10 @@ export default function useLogin() {
     if (user.error?.response.status === 401) {
       router.push('/login');
     }
-  }, [user, router]);
+
+    console.log(user);
+    if (user && requireAccount && !user.accounts?.length) {
+      router.push('/onboarding');
+    }
+  }, [user, router, requireAccount]);
 }

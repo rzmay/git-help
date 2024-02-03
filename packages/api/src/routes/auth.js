@@ -57,8 +57,12 @@ router.post('/recycle', async (req, res, next) => {
   }
 });
 
-router.get('/user', user(), async (req, res) => {
-  res.send(res.locals.user);
+router.get('/user', user(), async (req, res, next) => {
+  try {
+    res.send(req.user);
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

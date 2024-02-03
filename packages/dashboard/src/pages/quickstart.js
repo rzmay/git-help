@@ -1,8 +1,11 @@
 import React from 'react';
+import useAJAX from '../hooks/useAJAX';
 import useLogin from '../hooks/useLogin';
 
 export default function QuickStart() {
-  useLogin();
+  useLogin(true);
+
+  const data = useAJAX('/ajax/account/github');
 
   return (
     <div className="p-4">
@@ -11,7 +14,7 @@ export default function QuickStart() {
 
       <ul className="list-disc pl-5 mt-4">
         <li>
-          <a href="https://github.com/your-repo" className="text-indigo-600 hover:text-indigo-800 transition duration-150 ease-in-out">
+          <a href={data?.link} className="text-indigo-600 hover:text-indigo-800 transition duration-150 ease-in-out">
             Link to Repo
           </a>
         </li>
