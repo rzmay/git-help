@@ -2,7 +2,6 @@ import React from 'react';
 
 export default function Dashboard() {
   // Example data for the issues table
-  console.log("MOTLDSFJK");
   const issues = [
     { id: 1, title: 'Issue 1', status: 'Open', priority: 'High' },
     { id: 2, title: 'Issue 2', status: 'Closed', priority: 'Medium' },
