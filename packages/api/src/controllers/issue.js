@@ -76,6 +76,7 @@ module.exports.listIssues = async function listIssues(req, res, next) {
 
     res.send(issues);
   } catch (err) {
+    console.log(err)
     next(err);
   }
 };

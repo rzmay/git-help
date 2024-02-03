@@ -1,3 +1,4 @@
+import dayjs from 'lib/dayjs';
 import React from 'react';
 import useAPI from '../hooks/useAPI';
 import useLogin from '../hooks/useLogin';
@@ -12,20 +13,38 @@ export default function Dashboard() {
 
   const getImpactColor = (impact) => {
     switch (impact) {
-      case 'High': return 'text-red-600';
-      case 'Medium': return 'text-yellow-600';
-      case 'Low': return 'text-green-600';
+      case 'wide': return 'text-red-600';
+      case 'medium': return 'text-yellow-600';
+      case 'minimal': return 'text-green-600';
       default: return 'text-gray-600';
     }
   };
 
   const getUrgencyColor = (urgency) => {
     switch (urgency) {
-      case 'Critical': return 'text-red-600';
-      case 'High': return 'text-orange-600';
-      case 'Medium': return 'text-yellow-600';
-      case 'Low': return 'text-green-600';
+      case 'critical': return 'text-red-600';
+      case 'high': return 'text-orange-600';
+      case 'medium': return 'text-yellow-600';
+      case 'low': return 'text-green-600';
       default: return 'text-gray-600';
+    }
+  };
+  const getImpactState = (impact) => {
+    switch (impact) {
+      case 'wide': return 'Wide';
+      case 'medium': return 'Medium';
+      case 'minimal': return 'Minimal';
+      default: return '';
+    }
+  };
+
+  const getUrgencyState = (urgency) => {
+    switch (urgency) {
+      case 'critical': return 'Critical';
+      case 'high': return 'High';
+      case 'medium': return 'Medium';
+      case 'low': return 'Low';
+      default: return '';
     }
   };
 
@@ -48,13 +67,13 @@ export default function Dashboard() {
           <tbody>
             {issues.map((issue) => (
               <tr key={issue.id} className="border-b">
-                <td className="px-4 py-2">{issue.created}</td>
+                <td className="px-4 py-2">{dayjs(issue.created).format('LLL')}</td>
                 <td className="px-4 py-2">{issue.number}</td>
                 <td className="px-4 py-2">{issue.complaints}</td>
                 <td className="px-4 py-2">{issue.title}</td>
                 <td className="px-4 py-2">{issue.description}</td>
-                <td className={`px-4 py-2 ${getUrgencyColor(issue.labelsurgency)}`}>{issue.labelsurgency}</td>
-                <td className={`px-4 py-2 ${getImpactColor(issue.labelsimpact)}`}>{issue.labelsimpact}</td>
+                <td className={`px-4 py-2 font-bold ${getUrgencyColor(issue.labels.urgency)}`}>{getUrgencyState(issue.labels.urgency)}</td>
+                <td className={`px-4 py-2 font-bold ${getImpactColor(issue.labels.impact)}`}>{getImpactState(issue.labels.impact)}</td>
               </tr>
             ))}
           </tbody>

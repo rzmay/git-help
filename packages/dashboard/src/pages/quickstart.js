@@ -1,9 +1,8 @@
 import React from 'react';
+import { CopyBlock, dracula } from 'react-code-blocks';
 import useAJAX from '../hooks/useAJAX';
-import useLogin from '../hooks/useLogin';
-import Code from '../components/Code2';
 import useAccount from '../hooks/useAccount';
-
+import useLogin from '../hooks/useLogin';
 
 export default function QuickStart() {
   useLogin(true);
@@ -15,28 +14,39 @@ export default function QuickStart() {
   if (loading) return <div>Please login before accessing the dashboard</div>;
   if (error) return <div>Error: {error.message}</div>;
   // Ensure that user and accountKey are defined before using them
-  const scriptCode =
-    `<script src="http://localhost:7000/embed/?key=${account.public_key}&user={USER_ID}"></script>
-    <script src="http://localhost:7000/embed/css"></script>`;
+  const scriptCode = `<script src="http://localhost:7000/embed/?key=${account.public_key}&user={USER_ID}"></script>
+<script src="http://localhost:7000/embed/css"></script>`;
 
   return (
-    <div className="p-4">
+    <div className="p-4 font-sans">
       <h1 className="text-2xl font-bold mb-4">Quick Start Guide</h1>
-      <p>Welcome to our Quick Start Guide. Here you'll find essential resources to get you up and running quickly.</p>
-
+      <p>Welcome to our Quick Start Guide. Here you'll find essential resources to get you up and running quickly and using GitHelp!.</p>
       <ul className="list-disc pl-5 mt-4">
         <li>
+          <h1 className="text-2xl mb-4">Download the GitHub App</h1>
+          <p>First in order to use our serivce, you must connect your github repository to our GitHub App. This is required in order for GitHelp to be able to create issues in the repository.</p>
           <a href={data?.link} className="text-indigo-600 hover:text-indigo-800 transition duration-150 ease-in-out">
             Link to Repo - Install the Github Application
           </a>
         </li>
+        <li>
+          <div className="mt-4">
+            <h1 className="text-2xl mb-4">Embed the application onto your website.</h1>
+            <p>Add the following code to your website. This will add a small icon to your website which allows users to input their feedback into a text prompt when it is clicked. The key is your own custom key that is used to classify your own company. Do not share this with anyone, keep this private. Fill in the userID with an ID of your choice.</p>
+            <div>
+              <CopyBlock
+                text={scriptCode}
+                language="python"
+                showLineNumbers="true"
+                wrapLines
+                theme={dracula}
+              />
+            </div>
+          </div>
+        </li>
       </ul>
-      <div className="mt-4">
-        <h2 className="text-xl font-semibold mb-2">Embedding Code</h2>
-        <Code multiline>
-          {scriptCode}
-        </Code>
-      </div>
+      <br />
+      <p>And it's as simple as that! You've now successfully added the GitHelp application into your website. Now you can wait for your both your database and GitHub to populate with user feedback.</p>
     </div>
   );
 }
