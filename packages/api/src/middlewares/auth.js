@@ -7,7 +7,7 @@ require('lib/models/User');
 
 module.exports = function auth() {
   return async function (req, res, next) {
-    if (!req.cookies.authorization) res.sendStatus(status.UNAUTHORIZED);
+    if (!req.cookies.authorization) return res.sendStatus(status.UNAUTHORIZED);
 
     // Fetch relevant token
     const token = await Token.findById(req.cookies.authorization);
@@ -17,7 +17,7 @@ module.exports = function auth() {
 
     const user = await User.findById(token.user);
     const account = await Account.findOne({
-      _id: req.get('Hyper-Account'),
+      _id: req.get('GitHelp-Account'),
       staff: user.id,
     });
 

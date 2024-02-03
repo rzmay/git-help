@@ -1,4 +1,4 @@
-fileContent = `
+const fileContent = `
 <!DOCTYPE html>
 <html lang="en">
 

@@ -1,6 +1,9 @@
 import React from 'react';
+import useLogin from '../hooks/useLogin';
 
 export default function QuickStart() {
+  useLogin();
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Quick Start Guide</h1>
