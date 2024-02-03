@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
       }
 
       // Append the dynamic line to the file contents
-      const modifiedData = `${data}\nconst githelp_accountPublicKey = "${key}";\n`;
+      const modifiedData = `${data}\nwindow.githelp_accountPublicKey = "${key}";\n`;
 
       // Set the Content-Type to JavaScript
       res.setHeader('Content-Type', 'application/javascript');

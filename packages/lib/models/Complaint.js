@@ -45,7 +45,7 @@ const complaintSchema = new mongoose.Schema({
 });
 
 // After an complaint is created
-complaintSchema.post('save', async () => {
+complaintSchema.post('save', async function () {
   // Add to the complaints queue
   await complaintQueue.add(this.toJSON(), {
     removeOnComplete: true,
