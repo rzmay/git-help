@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 export default function Header() {
@@ -17,8 +17,6 @@ export default function Header() {
             />
           </Link>
         </div>
-
-
 
         <nav className="flex-shrink-0">
           <ul className="flex justify-end space-x-4">
