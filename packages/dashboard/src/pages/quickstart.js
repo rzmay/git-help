@@ -17,7 +17,9 @@ export default function QuickStart() {
   if (error) return <div>Error: {error.message}</div>;
   // Ensure that user and accountKey are defined before using them
   const scriptCode =
-    `<script src="http://localhost:7000/embed/?key=${account.public_key}&user={USER_ID}"></script>
+    `<link rel="stylesheet" href="https://rawcdn.githack.com/rzmay/git-help/main/packages/embed/styles.css"></link>
+<div id="githelp"></div>
+<script src="http://localhost:7000/embed/?key=${account.public_key}&user={USER_ID}"></script>
 <script src="http://localhost:7000/embed/css"></script>`;
 
   return (
