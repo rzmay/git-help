@@ -1,5 +1,6 @@
+import Link from 'next/link';
+import React from 'react';
 import logo from '../images/GitHelp.png';
-import Link from 'next/link'
 
 export default function Header() {
   return (
@@ -23,7 +24,9 @@ export default function Header() {
               </li>
               <li>
                 <Link
-                  href="/login" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  href="/login"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
                   Log in
                 </Link>
               </li>

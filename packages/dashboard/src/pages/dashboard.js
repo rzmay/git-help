@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Dashboard() {
   // Example data for the issues table
-  console.log("MOTLDSFJK");
+  console.log('MOTLDSFJK');
   const issues = [
     { id: 1, title: 'Issue 1', status: 'Open', priority: 'High' },
     { id: 2, title: 'Issue 2', status: 'Closed', priority: 'Medium' },
@@ -24,7 +24,7 @@ export default function Dashboard() {
             </tr>
           </thead>
           <tbody>
-            {issues.map(issue => (
+            {issues.map((issue) => (
               <tr key={issue.id} className="border-b">
                 <td className="px-4 py-2">{issue.id}</td>
                 <td className="px-4 py-2">{issue.title}</td>

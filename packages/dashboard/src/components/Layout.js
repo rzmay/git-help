@@ -1,10 +1,11 @@
+import React from 'react';
 import Header from './Header';
 
-export default function Layout() {
+export default function Layout({ children }) {
   return (
     <div>
       <Header />
-      {/* Other components or content can go here */}
+      {children}
     </div>
   );
 }
