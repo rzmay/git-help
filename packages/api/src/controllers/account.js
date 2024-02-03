@@ -6,7 +6,7 @@ module.exports.retrieveAccount = async function retrieveAccount(req, res, next) 
   try {
     const account = await Account.findOne({
       _id: req.params.id,
-      ...(res.locals.account && { _id: res.locals.account }),
+      ...(res.locals.account && { _id: res.locals.account.id }),
     });
 
     if (!account) return res.sendStatus(status.NOT_FOUND);

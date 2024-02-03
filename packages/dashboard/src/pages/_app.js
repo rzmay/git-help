@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }) {
 
   React.useEffect(() => {
     setAccount(localStorage.getItem('account'));
-  });
+  }, []);
 
   return (
     <DashboardContext.Provider value={dashboardContext}>

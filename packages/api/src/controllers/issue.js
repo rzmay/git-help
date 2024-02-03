@@ -6,7 +6,7 @@ module.exports.createIssue = async function createIssue(req, res, next) {
   try {
     const issue = await Issue.create({
       ...req.body,
-      ...(res.locals.account && { account: res.locals.account }),
+      ...(res.locals.account && { account: res.locals.account.id }),
     });
 
     res.send(issue.toJSON());
@@ -20,7 +20,7 @@ module.exports.retrieveIssue = async function retrieveIssue(req, res, next) {
   try {
     const issue = await Issue.findOne({
       _id: req.params.id,
-      ...(res.locals.account && { account: res.locals.account }),
+      ...(res.locals.account && { account: res.locals.account.id }),
       expand: req.query.expand,
     });
 
@@ -37,7 +37,7 @@ module.exports.updateIssue = async function updateIssue(req, res, next) {
   try {
     const issue = await Issue.findOneAndUpdate({
       _id: req.params.id,
-      ...(res.locals.account && { account: res.locals.account }),
+      ...(res.locals.account && { account: res.locals.account.id }),
     }, req.body, { runValidators: true, new: true });
 
     if (!issue) return res.sendStatus(status.NOT_FOUND);
@@ -53,7 +53,7 @@ module.exports.deleteIssue = async function deleteIssue(req, res, next) {
   try {
     const issue = await Issue.findOne({
       _id: req.params.id,
-      ...(res.locals.account && { account: res.locals.account }),
+      ...(res.locals.account && { account: res.locals.account.id }),
     });
 
     if (!issue) return res.sendStatus(status.NOT_FOUND);
@@ -71,7 +71,7 @@ module.exports.listIssues = async function listIssues(req, res, next) {
   try {
     const issues = await Issue.paginate({
       ...req.query,
-      ...(res.locals.account && { account: res.locals.account }),
+      ...(res.locals.account && { account: res.locals.account.id }),
     });
 
     res.send(issues);

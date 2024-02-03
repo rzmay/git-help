@@ -6,7 +6,7 @@ module.exports.createComplaint = async function createComplaint(req, res, next) 
   try {
     const complaint = await Complaint.create({
       ...req.body,
-      ...(res.locals.account && { account: res.locals.account }),
+      ...(res.locals.account && { account: res.locals.account.id }),
     });
 
     res.send(complaint.toJSON());
@@ -20,7 +20,7 @@ module.exports.retrieveComplaint = async function retrieveComplaint(req, res, ne
   try {
     const complaint = await Complaint.findOne({
       _id: req.params.id,
-      ...(res.locals.account && { account: res.locals.account }),
+      ...(res.locals.account && { account: res.locals.account.id }),
       expand: req.query.expand,
     });
 
@@ -37,7 +37,7 @@ module.exports.deleteComplaint = async function deleteComplaint(req, res, next) 
   try {
     const complaint = await Complaint.findOne({
       _id: req.params.id,
-      ...(res.locals.account && { account: res.locals.account }),
+      ...(res.locals.account && { account: res.locals.account.id }),
     });
 
     if (!complaint) return res.sendStatus(status.NOT_FOUND);
@@ -55,7 +55,7 @@ module.exports.listComplaints = async function listComplaints(req, res, next) {
   try {
     const complaints = await Complaint.paginate({
       ...req.query,
-      ...(res.locals.account && { account: res.locals.account }),
+      ...(res.locals.account && { account: res.locals.account.id }),
     });
 
     res.send(complaints);
