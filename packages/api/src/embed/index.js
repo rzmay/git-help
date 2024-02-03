@@ -54,13 +54,15 @@ function toggleComplaintBox() {
   }
 }
 
-function sendData(submittedComplaint, currentUrl) {
+function sendData(submittedComplaint) {
   const apiUrl = 'http://localhost:7000/embed/complaint'; // Replace with your API endpoint
   const token = window.githelp_accountPublicKey;
+  const user = window.githelp_userId;
 
   const requestData = {
     body: submittedComplaint,
-    page: currentUrl,
+    page: window.location.pathname,
+    user,
   };
 
   fetch(apiUrl, {
@@ -94,7 +96,6 @@ function submitComplaint() {
   // Clear the text area
   document.querySelector('#complaint-box textarea').value = '';
 
-  const currentURL = window.location.href;
   // You can use the submittedComplaint variable for further processing or API calls
-  sendData(submittedComplaint, currentURL);
+  sendData(submittedComplaint);
 }
