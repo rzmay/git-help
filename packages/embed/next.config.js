@@ -1,6 +1,6 @@
 const bundleAnalyzer = require('@next/bundle-analyzer');
 const transpileModules = require('next-transpile-modules');
-const withPlugins = require('lib/helpers/withPlugins');
+const withPlugins = require('./lib/helpers/withPlugins');
 
 module.exports = withPlugins([
   transpileModules(['lib']),
