@@ -55,8 +55,8 @@ export default function Dashboard() {
                 <td className="px-4 py-2">{issue.complaints}</td>
                 <td className="px-4 py-2">{issue.title}</td>
                 <td className="px-4 py-2">{issue.description}</td>
-                <td className={`px-4 py-2 ${getUrgencyColor(issue.labelsurgency)}`}>{issue.labelsurgency}</td>
-                <td className={`px-4 py-2 ${getImpactColor(issue.labelsimpact)}`}>{issue.labelsimpact}</td>
+                <td className={`px-4 py-2 ${getUrgencyColor(issue.labels.urgency)}`}>{issue.labels.urgency}</td>
+                <td className={`px-4 py-2 ${getImpactColor(issue.labels.impact)}`}>{issue.labels.impact}</td>
               </tr>
             ))}
           </tbody>
