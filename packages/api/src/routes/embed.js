@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 
     if (!key) return res.sendStatus(status.BAD_REQUEST);
 
-    fs.readFile('../embed/index.js', 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, '../embed/index.js'), 'utf8', (err, data) => {
       if (err) {
         console.error('Error reading the JavaScript file:', err);
         return res.status(500).send('An error occurred');
