@@ -4,7 +4,7 @@ import DashboardContext from '../context/DashboardContext';
 
 export default function useAccount() {
   const { account } = React.useContext(DashboardContext);
-  const { data, error, mutate } = useSWR(account && [`/ajax/accounts/${account}`, account]);
+  const { data, error, mutate } = useSWR(account && ['/ajax/account', account]);
 
   return {
     data,

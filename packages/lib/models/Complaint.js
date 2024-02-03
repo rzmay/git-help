@@ -45,7 +45,7 @@ const complaintSchema = new mongoose.Schema({
 });
 
 // After an complaint is created
-complaintSchema.post('save', async () => {
+complaintSchema.post('save', async function () {
   // Add to the complaints queue
   await complaintQueue.add(this.toJSON(), {
     removeOnComplete: true,
@@ -54,4 +54,4 @@ complaintSchema.post('save', async () => {
   });
 });
 
-module.exports = mongoose.models.Issue || mongoose.model('Issue', complaintSchema);
+module.exports = mongoose.models.Complaint || mongoose.model('Complaint', complaintSchema);

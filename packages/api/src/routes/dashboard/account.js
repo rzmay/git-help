@@ -5,7 +5,7 @@ const user = require('../../middlewares/user');
 
 const router = express.Router();
 
-router.post('/account', user(), async (req, res, next) => {
+router.post('/accounts', user(), async (req, res, next) => {
   try {
     const account = await Account.create({
       ...req.body,
@@ -29,7 +29,7 @@ router.get('/account', auth(), async (req, res, next) => {
 
 router.get('/account/github', auth(), async (req, res, next) => {
   try {
-    res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&state=${res.locals.account.id}`);
+    res.send({ link: `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&state=${res.locals.account.id}` });
   } catch (err) {
     next(err);
   }

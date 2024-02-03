@@ -13,6 +13,10 @@ export default function App({ Component, pageProps }) {
     setAccount,
   }), [account]);
 
+  React.useEffect(() => {
+    setAccount(localStorage.getItem('account'));
+  });
+
   return (
     <DashboardContext.Provider value={dashboardContext}>
       <SWRConfig value={{

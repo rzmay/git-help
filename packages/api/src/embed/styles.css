@@ -32,6 +32,14 @@ body {
   margin-bottom: 10px;
 }
 
+#submit-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
 #close-btn {
   background-color: #dc3545;
   color: #fff;

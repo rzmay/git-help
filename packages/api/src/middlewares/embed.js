@@ -7,17 +7,17 @@ module.exports = function auth() {
   return async function (req, res, next) {
     const bearerToken = /^ *[Bb][Ee][Aa][Rr][Ee][Rr] +([A-Za-z0-9_-]+) *$/.test(req.get('Authorization')) ? req.get('Authorization').split(' ')[1] : undefined;
 
-    if (bearerToken) {
-      // Fetch relevant account
-      const account = await Account.findOne({ public_key: bearerToken });
+    if (!bearerToken) return res.sendStatus(status.UNAUTHORIZED);
 
-      // Reject if authorization token not found
-      if (!account) return res.sendStatus(status.UNAUTHORIZED);
+    // Fetch relevant account
+    const account = await Account.findOne({ public_key: bearerToken });
 
-      // Set locals
-      res.locals.account = account;
+    // Reject if authorization token not found
+    if (!account) return res.sendStatus(status.UNAUTHORIZED);
 
-      next();
-    }
+    // Set locals
+    res.locals.account = account;
+
+    next();
   };
 };
