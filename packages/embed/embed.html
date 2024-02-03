@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,10 +49,13 @@
     }
   </style>
 </head>
+
 <body>
 
   <div id="logo-container" onclick="toggleComplaintBox()">
-    <img src="GitHelp.png" alt="Your Logo" width="30" height="30">
+    <!-- Use the provided Imgur link -->
+    <a target="_blank"><img id="logo-img" alt="Your Logo" width="30" height="30" src="https://i.imgur.com/jsu0fLN.png"
+        title="source: imgur.com" /></a>
   </div>
 
   <div id="complaint-box">
@@ -67,6 +71,7 @@
 
       if (complaintBox.style.display === 'none' || complaintBox.style.display === '') {
         logoContainer.style.opacity = '0';
+
         setTimeout(() => {
           logoContainer.style.display = 'none';
           complaintBox.style.display = 'block';
@@ -82,4 +87,5 @@
   </script>
 
 </body>
+
 </html>
