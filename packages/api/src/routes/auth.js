@@ -3,6 +3,7 @@ const status = require('http-status');
 const Token = require('lib/models/Token');
 const User = require('lib/models/User');
 const resend = require('lib/resend');
+const auth = require('../middlewares/auth');
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.post('/login/email', async (req, res, next) => {
     const token = await Token.create({ user: user.id, strategy: 'email' });
 
     const loginLink = token.getLoginLink(
-      req.query.redirect?.toString() || '/dashboard'
+      req.query.redirect?.toString() || '/dashboard',
     );
 
     await resend.emails.send({
@@ -36,7 +37,6 @@ router.post('/login/email', async (req, res, next) => {
     next(err);
   }
 });
-
 
 router.post('/recycle', async (req, res, next) => {
   try {

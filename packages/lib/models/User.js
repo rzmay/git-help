@@ -1,5 +1,5 @@
-const mongoose = require('../mongoose');
 const { nanoid } = require('nanoid');
+const mongoose = require('../mongoose');
 
 /*
   * The user model is responsible for individual user information.
@@ -23,8 +23,8 @@ const userSchema = new mongoose.Schema({
   },
   linkedin: { // Temporary. We will likely need to replace this with more linkedin info or a link to their profile.
     type: String,
-    lowercase: true
-  }
+    lowercase: true,
+  },
 });
 
 userSchema.index({ email: 1 }, { unique: true });
@@ -52,6 +52,6 @@ userSchema.methods.generateToken = async function generateToken() {
 
   // Create a new token and return
   return mongoose.models.Token.create({ user: this.id });
-}
+};
 
 module.exports = mongoose.models.User || mongoose.model('User', userSchema);

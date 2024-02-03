@@ -1,6 +1,11 @@
 const bundleAnalyzer = require('@next/bundle-analyzer');
+<<<<<<< HEAD:packages/dashboard/next.config.js
 // const transpileModules = require('next-transpile-modules');
 const withPlugins = require('./src/helpers/withPlugins');
+=======
+const withPlugins = require('lib/helpers/withPlugins');
+const transpileModules = require('next-transpile-modules');
+>>>>>>> 7b5eafb2550e155c5e635a1490206fcfea056e43:packages/embed/next.config.js
 
 module.exports = withPlugins([
   // transpileModules(['shared']),

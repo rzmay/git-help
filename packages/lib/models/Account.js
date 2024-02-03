@@ -1,5 +1,5 @@
 const { nanoid } = require('nanoid');
-const mongoose = require('../lib/mongoose');
+const mongoose = require('../mongoose');
 const User = require('./User');
 
 /*
@@ -37,7 +37,21 @@ const accountSchema = new mongoose.Schema({
     required: true,
     ref: 'User',
     validate: (v) => User.exists({ _id: v }),
-  }]
+  }],
+  settings: {
+    github_owner: {
+      type: String,
+      default: null,
+    },
+    github_repository: {
+      type: String,
+      default: null,
+    },
+    github_token: {
+      type: String,
+      default: null,
+    },
+  },
 });
 
 accountSchema.index({ 'staff.user': 1 });

@@ -1,5 +1,5 @@
-const { InvalidRequestError, RecipeError } = require('shared/helpers/Error');
-const mongoose = require('shared/lib/mongoose');
+const { InvalidRequestError } = require('lib/helpers/Error');
+const mongoose = require('lib/mongoose');
 
 module.exports = function errorHandler(err, req, res, next) {
   if (err instanceof SyntaxError) {
