@@ -54,11 +54,42 @@ function toggleComplaintBox() {
   }
 }
 
+function sendData(submittedComplaint, currentUrl) {
+  const apiUrl = 'http://localhost:7000/embed/complaint'; // Replace with your API endpoint
+  const token = window.githelp_accountPublicKey;
+
+  const requestData = {
+    body: submittedComplaint,
+    page: currentUrl,
+  };
+
+  fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log('POST request successful:', data);
+      // Handle the response data as needed
+    })
+    .catch((error) => {
+      console.error('Error making POST request:', error);
+      // Handle the error
+    });
+}
+
 function submitComplaint() {
   const complaintText = document.querySelector('#complaint-box textarea').value;
-  console.log('User entered complaint:', complaintText);
-  submittedComplaint = complaintText;
-  console.log('Complaint submitted:', submittedComplaint);
+  const submittedComplaint = complaintText;
 
   // Clear the text area
   document.querySelector('#complaint-box textarea').value = '';
@@ -66,41 +97,4 @@ function submitComplaint() {
   const currentURL = window.location.href;
   // You can use the submittedComplaint variable for further processing or API calls
   sendData(submittedComplaint, currentURL);
-}
-
-function sendData(submittedComplaint, currentUrl) {
-  const apiUrl = 'http://localhost:7000/embed/complaint'; // Replace with your API endpoint
-  const token = 'abdoul'; // Replace with your Bearer token
-
-  const requestData = {
-    body: submittedComplaint,
-    page: currentUrl,
-  };
-
-  console.log('apiUrl:', apiUrl);
-  console.log('token:', token);
-  console.log('requestData:', requestData);
-
-  fetch(apiUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-    body: JSON.stringify(requestData),
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('POST request successful:', data);
-      // Handle the response data as needed
-    })
-    .catch(error => {
-      console.error('Error making POST request:', error);
-      // Handle the error
-    });
 }

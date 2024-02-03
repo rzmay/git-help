@@ -66,7 +66,7 @@ const issueSchema = new mongoose.Schema({
 });
 
 // After an issue is created
-issueSchema.post('save', async () => {
+issueSchema.post('save', async function () {
   // Add to the issues queue
   await issueQueue.add(this.toJSON(), {
     removeOnComplete: true,
