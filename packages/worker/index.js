@@ -3,6 +3,7 @@ const mongoose = require('lib/mongoose');
 // const pubsub = require('lib/pubsub');
 const redis = require('lib/redis');
 const throng = require('throng');
+const complaintHandler = require('./src/queues/complaint');
 const issueHandler = require('./src/queues/issue');
 // const issueBacklogHandler = require('./src/subscriptions/issueBacklog');
 
@@ -15,12 +16,14 @@ async function start() {
 
   // Connect to named work queues
   const issueQueue = new Queue('issue', process.env.REDIS_URL);
+  const complaintQueue = new Queue('complaint', process.env.REDIS_URL);
 
   // Connect to GCS subscriptions
   // const issueBacklogSub = pubsub('issue-backlog');
 
   // Attach work handlers to queues
   issueQueue.process(50, issueHandler);
+  complaintQueue.process(50, complaintHandler);
 
   // Attach work handlers to subscriptions
   // issueBacklogSub.on('message', issueBacklogHandler);
