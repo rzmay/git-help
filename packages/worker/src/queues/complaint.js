@@ -21,7 +21,7 @@ module.exports = async function handleIssue(job) {
     // Update issue for complaint
     complaint.findByIdAndUpdate(job.id, { issue });
 
-    // Update complaint count for issue
+    // Update complaint by for issue
     issue.findByIdAndUpdate(issue, { $inc: { complaints: 1 } });
   } catch (err) {
     console.log(err);

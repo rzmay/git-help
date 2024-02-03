@@ -1,8 +1,10 @@
 const Queue = require('bull');
+const dayjs = require('lib/dayjs');
 const { nanoid } = require('nanoid');
 const mongoose = require('../mongoose');
 const { updateIssue } = require('../services/github.service');
 const Account = require('./Account');
+const Complaint = require('./Complaint');
 
 const issueQueue = new Queue('issue', process.env.REDIS_URL);
 
@@ -94,9 +96,28 @@ issueSchema.post('findOneAndUpdate', async (issue) => {
   );
 });
 
-issueSchema.methods.getMarkdown = function () {
-  // Placeholder -- we'll generate actual md later
-  return 'Issue :)';
+issueSchema.methods.getMarkdown = async function () {
+  const recentComplaints = await Complaint
+    .find({ account: this.account, issue: this.issue })
+    .sort({ created: -1 })
+    .limit(5);
+
+  return `
+  ${this.description}
+
+  ---
+  **${this.complaints} Complaints**
+
+  ${recentComplaints.map((c) => `
+    ${dayjs(c.created).format('LLL')}${c.user ? ` (${c.user})` : ''}
+    > ${c.body}
+    ${c.page ? `*On ${c.page}*` : ''}
+  `).join('')}
+
+  *See all complaints on your [GitHelp dashboard](${process.env.DASHBOARD_BASE_URL}/issue/${this.id})
+  ---
+  Powered by GitHelp
+  `;
 };
 
 issueSchema.methods.getLabels = function () {

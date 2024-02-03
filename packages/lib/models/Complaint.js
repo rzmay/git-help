@@ -37,6 +37,11 @@ const complaintSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  /* Optional user id */
+  user: {
+    type: String,
+    default: null,
+  },
 });
 
 // After an complaint is created
