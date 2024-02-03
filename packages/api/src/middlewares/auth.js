@@ -7,27 +7,27 @@ require('lib/models/User');
 
 module.exports = function auth() {
   return async function (req, res, next) {
-    if (req.cookies.authorization) {
-      // Fetch relevant token
-      const token = await Token.findById(req.cookies.authorization);
+    if (!req.cookies.authorization) res.sendStatus(status.UNAUTHORIZED);
 
-      // Reject if authorization token not found
-      if (!token) return res.sendStatus(status.UNAUTHORIZED);
+    // Fetch relevant token
+    const token = await Token.findById(req.cookies.authorization);
 
-      const user = await User.findById(token.user);
-      const account = await Account.findOne({
-        _id: req.get('Hyper-Account'),
-        staff: user.id,
-      });
+    // Reject if authorization token not found
+    if (!token) return res.sendStatus(status.UNAUTHORIZED);
 
-      // Reject if no user & account
-      if (!account || !user) return res.sendStatus(status.UNAUTHORIZED);
+    const user = await User.findById(token.user);
+    const account = await Account.findOne({
+      _id: req.get('Hyper-Account'),
+      staff: user.id,
+    });
 
-      // Set locals
-      req.user = user;
-      res.locals.account = account;
+    // Reject if no user & account
+    if (!account || !user) return res.sendStatus(status.UNAUTHORIZED);
 
-      next();
-    }
+    // Set locals
+    req.user = user;
+    res.locals.account = account;
+
+    next();
   };
 };
