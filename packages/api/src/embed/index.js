@@ -55,6 +55,7 @@ function toggleComplaintBox() {
 }
 
 function sendData(submittedComplaint) {
+  console.log("Sending Data")
   const apiUrl = 'http://localhost:7000/embed/complaint'; // Replace with your API endpoint
   const token = window.githelp_accountPublicKey;
   const user = window.githelp_userId;

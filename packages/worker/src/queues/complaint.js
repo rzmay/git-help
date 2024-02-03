@@ -32,7 +32,7 @@ module.exports = async function handleIssue(job) {
       messages: [{ 'role': 'user', 'content': 'essay on why nathan is a terrible name' }],
       max_tokens: 100
     })
-    console.log(response.choice[0].messages)
+    console.log(response)
 
     const issue = '';
 
