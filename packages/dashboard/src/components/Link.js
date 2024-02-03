@@ -18,22 +18,22 @@ const Link = React.forwardRef(({
   ...props
 }, ref) => {
   return (
-    <NextLink href={href} passHref scroll={scroll}>
-      <a
-        ref={ref}
-        className={clsx(className, {
-          'transition hover:underline text-blue-500 dark:text-blue-400': color,
-          'inline-flex items-center': icon,
-          'pointer-events-none': disabled,
-          underline,
-        })}
-        {...props}
-        target={external ? '_blank' : '_self'}
-      >
-        {children}
-        {icon && <Icon icon={icon} className="ml-1.5" size="sm" />}
-      </a>
-    </NextLink>
+  <NextLink href={href} passHref scroll={scroll}>
+    <a
+      className={clsx(className, {
+        'transition hover:underline text-blue-500 dark:text-blue-400': color,
+        'inline-flex items-center': icon,
+        'pointer-events-none': disabled,
+        underline,
+      })}
+      {...props}
+      target={external ? '_blank' : '_self'}
+    >
+      {children}
+      {icon && <Icon icon={icon} className="ml-1.5" size="sm" />}
+    </a>
+  </NextLink>
+
   );
 });
 
