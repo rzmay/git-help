@@ -14,14 +14,10 @@ export default function QuickStart() {
   if (loading) return <div>Please login before accessing the dashboard</div>;
   if (error) return <div>Error: {error.message}</div>;
   // Ensure that user and accountKey are defined before using them
-<<<<<<< HEAD
   const scriptCode =
     `<link rel="stylesheet" href="https://rawcdn.githack.com/rzmay/git-help/main/packages/embed/styles.css"></link>
 <div id="githelp"></div>
 <script src="http://localhost:7000/embed/?key=${account.public_key}&user={USER_ID}"></script>
-=======
-  const scriptCode = `<script src="http://localhost:7000/embed/?key=${account.public_key}&user={USER_ID}"></script>
->>>>>>> 6c4d9962f8cfc36813787c7d134199ab7d54a8ae
 <script src="http://localhost:7000/embed/css"></script>`;
 
   return (
