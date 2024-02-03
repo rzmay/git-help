@@ -26,11 +26,16 @@ const issueSchema = new mongoose.Schema({
   },
   number: {
     type: Number,
-    /* TODO: We need to update this somewhere... */
+    default: null,
   },
   status: {
     type: String,
     enum: ['processing', 'open', 'closed', 'completed'],
+    default: 'processing',
+  },
+  complaints: {
+    type: Number,
+    default: 0,
   },
   title: {
     type: String,
@@ -70,8 +75,13 @@ issueSchema.post('save', async () => {
 
 // After an issue is updated
 issueSchema.post('findOneAndUpdate', async (issue) => {
+  const update = this.getUpdate()?.$set || this.getUpdate();
+
+  // Return if this is the first update
+  if (update.number) return;
+
   // We'll make a call to GitHub here in order to add the issue to the repository
-  if (this.status !== 'open') return;
+  if (issue.status !== 'open') return;
 
   const account = await Account.findById(issue.account);
 

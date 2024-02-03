@@ -21,12 +21,12 @@ router.post('/login/email', async (req, res, next) => {
     await resend.emails.send({
       from: '',
       to: req.body.email,
-      subject: 'Log in to [...]',
+      subject: 'Log in to GitHelp',
       html: `
         <div>
-          Your login link for [...]
+          Your login link for GitHelp
           <br /><br />
-          <a href="${loginLink}">Continue to [...]</a>
+          <a href="${loginLink}">Continue to GitHelp</a>
           <br /><br />
         </div>
       `,
@@ -61,4 +61,4 @@ router.get('/user', auth(), async (req, res) => {
   res.send(res.locals.user);
 });
 
-export default router;
+module.exports = router;

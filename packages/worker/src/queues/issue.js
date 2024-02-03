@@ -21,6 +21,7 @@ module.exports = async function handleIssue(job) {
 
     // Update issue number
     issue.findByIdAndUpdate(job.id, {
+      status: 'open',
       number: data.number,
     });
   } catch (err) {
