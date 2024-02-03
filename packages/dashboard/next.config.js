@@ -12,7 +12,13 @@ module.exports = withPlugins([
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['*', 'www.gravatar.com', 'lh3.googleusercontent.com', 'i.seadn.io'],
+    // domains: ['*', 'www.gravatar.com', 'lh3.googleusercontent.com', 'i.seadn.io', 'i.imgur.com'],
+    remotePatterns: [
+      { hostname: 'www.gravatar.com' },
+      { hostname: 'lh3.googleusercontent.com' },
+      { hostname: 'i.seadn.io' },
+      { hostname: 'i.imgur.com' }
+    ]
   },
   async rewrites() {
     return [
