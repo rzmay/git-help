@@ -24,7 +24,7 @@ export default function Login() {
 
   return (
     <>
-      <NextSeo title="Login – Hyper" noindex />
+      <NextSeo title="Login – GitHelp" noindex />
 
       <div className="bg-gray-50 dark:bg-gray-800 min-h-screen flex flex-col justify-center items-center px-5 py-20">
         <Text size="2xl" weight="semibold" className="mt-5">Sign in to GitHelp</Text>
