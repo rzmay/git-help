@@ -54,4 +54,4 @@ complaintSchema.post('save', async function () {
   });
 });
 
-module.exports = mongoose.models.Issue || mongoose.model('Issue', complaintSchema);
+module.exports = mongoose.models.Complaint || mongoose.model('Complaint', complaintSchema);
