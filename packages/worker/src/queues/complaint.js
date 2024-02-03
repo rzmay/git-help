@@ -1,4 +1,5 @@
 const Queue = require('bull');
+const getGitHubPayload = require('lib/helpers/getGithubPayload');
 const Account = require('lib/models/Account');
 const Complaint = require('lib/models/Complaint');
 const Issue = require('lib/models/Issue');
@@ -113,14 +114,12 @@ module.exports = async function handleComplaint(job) {
     const completion = await getCompletion(prompt, tools);
     const functionCall = completion.tool_calls[0].function;
 
-    console.log(functionCall);
-
     if (functionCall.name === 'reference_issue') {
       // Parse args
       const { id: issue } = JSON.parse(functionCall.arguments);
 
       // Update issue for complaint
-      Complaint.findByIdAndUpdate(job.id, { issue });
+      await Complaint.findByIdAndUpdate(job.id, { issue });
 
       // Update complaint count and add issue update to queue
       const i = await Issue.findByIdAndUpdate(issue, { $inc: { complaints: 1 } });
@@ -145,7 +144,7 @@ module.exports = async function handleComplaint(job) {
       Complaint.findByIdAndUpdate(job.id, { issue: i.id });
 
       const data = await createIssue(
-        i.getGitHubPayload(),
+        await getGitHubPayload(i),
         account.settings.github_owner,
         account.settings.github_repository,
         account.settings.github_token,
