@@ -3,6 +3,7 @@ const fs = require('fs');
 const status = require('http-status');
 const Complaint = require('lib/models/Complaint');
 const Issue = require('lib/models/Issue');
+const path = require('path');
 const embed = require('../middlewares/embed');
 
 const router = express.Router();
@@ -35,7 +36,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/css', async (req, res, next) => {
   try {
-    res.sendFile('../embed/styles.css');
+    res.sendFile(path.join(__dirname, '../embed/styles.css'));
   } catch (err) {
     next(err);
   }
