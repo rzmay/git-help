@@ -8,7 +8,9 @@ module.exports = async function handleIssue(job) {
 
   try {
     const issue = await Issue.findById(job.id);
-    const account = await Account.findById(issue.account);
+    const account = await Account.findById(issue?.account);
+
+    if (!issue) throw new Error('Issue not found');
 
     // Get complaints
     const complaints = await Complaint.find({ account: account.id, issue: job.id }).select('page body');

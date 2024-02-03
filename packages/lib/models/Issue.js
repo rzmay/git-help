@@ -1,6 +1,7 @@
 const Queue = require('bull');
 const dayjs = require('lib/dayjs');
 const { nanoid } = require('nanoid');
+const getGitHubPayload = require('../helpers/getGithubPayload');
 const mongoose = require('../mongoose');
 const { updateIssue } = require('../services/github.service');
 const Account = require('./Account');
@@ -66,83 +67,33 @@ const issueSchema = new mongoose.Schema({
 });
 
 // After an issue is created
-issueSchema.post('save', async function () {
-  // Add to the issues queue
-  await issueQueue.add(this.toJSON(), {
-    removeOnComplete: true,
-    removeOnFail: true,
-    jobId: this.id,
-  });
-});
+// issueSchema.post('save', async function () {
+//   // Add to the issues queue
+//   await issueQueue.add(this.toJSON(), {
+//     removeOnComplete: true,
+//     removeOnFail: true,
+//     jobId: this.id,
+//   });
+// });
 
 // After an issue is updated
 issueSchema.post('findOneAndUpdate', async (issue) => {
-  const update = this.getUpdate()?.$set || this.getUpdate();
-
-  // Return if this is the first update
-  if (update.number) return;
+  if (!issue) return;
 
   // We'll make a call to GitHub here in order to add the issue to the repository
   if (issue.status !== 'open') return;
 
   const account = await Account.findById(issue.account);
 
-  return updateIssue(
+  const res = await updateIssue(
     issue.number,
-    issue.getGithubPayload(),
+    await getGitHubPayload(issue),
     account.settings.github_owner,
     account.settings.github_repository,
     account.settings.github_token,
   );
+
+  console.log(res);
 });
-
-issueSchema.methods.getMarkdown = async function () {
-  const recentComplaints = await Complaint
-    .find({ account: this.account, issue: this.issue })
-    .sort({ created: -1 })
-    .limit(5);
-
-  return `
-  ${this.description}
-
-  ---
-  **${this.complaints} Complaints**
-
-  ${recentComplaints.map((c) => `
-    ${dayjs(c.created).format('LLL')}${c.user ? ` (${c.user})` : ''}
-    > ${c.body}
-    ${c.page ? `*On ${c.page}*` : ''}
-  `).join('')}
-
-  *See all complaints on your [GitHelp dashboard](${process.env.DASHBOARD_BASE_URL}/issue/${this.id})
-  ---
-  Powered by GitHelp
-  `;
-};
-
-issueSchema.methods.getLabels = function () {
-  return [
-    `${this.labels.urgency.capitalize()} Urgency`,
-    `${this.labels.type.capitalize()}`,
-    `${this.labels.impact.capitalize()}, Impact`,
-    `Implement in ${this.labels.estimated_implementation_time}`,
-  ];
-};
-
-issueSchema.methods.getGitHubPayload = async function () {
-  // Placeholder -- we'll generate actual payload later
-  const account = await Account.findById(this.account);
-
-  return {
-    owner: account.settings.github_owner,
-    repo: account.settings.github_repository,
-    title: this.title,
-    body: await this.getMarkdown(),
-    labels: this.getLabels(),
-    headers: {
-      'X-GitHub-Api-Version': '2022-11-28',
-    },
-  };
-};
 
 module.exports = mongoose.models.Issue || mongoose.model('Issue', issueSchema);
