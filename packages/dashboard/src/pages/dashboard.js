@@ -1,7 +1,6 @@
-import dayjs from 'lib/dayjs';
+// import dayjs from 'lib/dayjs';
 import React from 'react';
 import useLogin from '../hooks/useLogin';
-import dayjs from 'lib/dayjs'
 import useAPI from '../hooks/useAPI'
 
 export default function Dashboard() {
@@ -11,7 +10,7 @@ export default function Dashboard() {
 
   console.log(issues);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>Please login before accessing the dashboard</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   const getImpactColor = (impact) => {
@@ -41,14 +40,11 @@ export default function Dashboard() {
           <thead className="bg-gray-200">
             <tr>
               <th className="px-4 py-2">Created</th>
-              <th className="px-4 py-2">Account</th>
               <th className="px-4 py-2 ">Number</th>
               <th className="px-4 py-2">Complaints</th>
               <th className="px-4 py-2">Title</th>
               <th className="px-4 py-2">Description</th>
-              <th className="px-4 py-2">ETOC</th>
               <th className="px-4 py-2">Urgency</th>
-              <th className="px-4 py-2">Type</th>
               <th className="px-4 py-2">Impact</th>
             </tr>
           </thead>
