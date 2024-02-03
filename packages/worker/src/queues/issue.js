@@ -1,4 +1,5 @@
 const Account = require('lib/models/Account');
+const Complaint = require('lib/models/Complaint');
 const Issue = require('lib/models/Issue');
 const { createIssue } = require('lib/services/github.service');
 
@@ -8,6 +9,9 @@ module.exports = async function handleIssue(job) {
   try {
     const issue = await Issue.findById(job.id);
     const account = await Account.findById(issue.account);
+
+    // Get complaints
+    const complaints = await Complaint.find({ account: account.id, issue: job.id }).select('page body');
 
     // Call openAI, updating fields
 
@@ -21,6 +25,7 @@ module.exports = async function handleIssue(job) {
 
     // Update issue number
     issue.findByIdAndUpdate(job.id, {
+      status: 'open',
       number: data.number,
     });
   } catch (err) {

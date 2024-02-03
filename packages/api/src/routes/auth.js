@@ -2,7 +2,7 @@ const express = require('express');
 const status = require('http-status');
 const Token = require('lib/models/Token');
 const User = require('lib/models/User');
-const resend = require('lib/resend');
+// const resend = require('lib/resend');
 const auth = require('../middlewares/auth');
 
 const router = express.Router();
@@ -18,19 +18,19 @@ router.post('/login/email', async (req, res, next) => {
       req.query.redirect?.toString() || '/dashboard',
     );
 
-    await resend.emails.send({
-      from: '',
-      to: req.body.email,
-      subject: 'Log in to [...]',
-      html: `
-        <div>
-          Your login link for [...]
-          <br /><br />
-          <a href="${loginLink}">Continue to [...]</a>
-          <br /><br />
-        </div>
-      `,
-    });
+    // await resend.emails.send({
+    //   from: '',
+    //   to: req.body.email,
+    //   subject: 'Log in to GitHelp',
+    //   html: `
+    //     <div>
+    //       Your login link for GitHelp
+    //       <br /><br />
+    //       <a href="${loginLink}">Continue to GitHelp</a>
+    //       <br /><br />
+    //     </div>
+    //   `,
+    // });
 
     res.sendStatus(200);
   } catch (err) {
@@ -61,4 +61,4 @@ router.get('/user', auth(), async (req, res) => {
   res.send(res.locals.user);
 });
 
-export default router;
+module.exports = router;

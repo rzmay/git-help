@@ -8,12 +8,15 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@google-cloud/pubsub": "^3.0.3",
     "axios": "1.6.7",
+    "dayjs": "^1.11.10",
     "lodash": "^4.17.21",
     "mongoose": "^6.12.6",
     "mongoose-autopopulate": "^0.16.0",
     "mongoose-lean-virtuals": "^0.9.0",
     "nanoid": "^3.3.4",
-    "redis": "^4.6.12"
+    "node-fetch": "^3.3.2",
+    "redis": "^4.6.12",
+    "resend": "^3.1.0"
   },
   "main": "pubsub.js",
   "scripts": {

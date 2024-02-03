@@ -11,12 +11,11 @@ const router = express.Router();
 router.get('/accounts/:id', auth(), accounts.retrieveAccount);
 router.patch('/accounts/:id', auth(), accounts.updateAccount);
 router.delete('/accounts/:id', auth(), accounts.deleteAccount);
-router.get('/accounts', auth(), accounts.listAccounts);
+// router.get('/accounts', auth(), accounts.listAccounts);
 
 // Complaints
 router.post('/complaints', auth(), complaints.createComplaint);
 router.get('/complaints/:id', auth(), complaints.retrieveComplaint);
-router.patch('/complaints/:id', auth(), complaints.updateComplaint);
 router.delete('/complaints/:id', auth(), complaints.deleteComplaint);
 router.get('/complaints', auth(), complaints.listComplaints);
 
@@ -30,6 +29,6 @@ router.get('/issues', auth(), issues.listIssues);
 // Users
 router.get('/users/:id', auth(), users.retrieveUser);
 router.patch('/users/:id', auth(), users.updateUser);
-router.get('/users', auth(), users.listUsers);
+// router.get('/users', auth(), users.listUsers);
 
 module.exports = router;

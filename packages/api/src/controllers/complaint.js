@@ -32,22 +32,6 @@ module.exports.retrieveComplaint = async function retrieveComplaint(req, res, ne
   }
 };
 
-// Update a complaint
-module.exports.updateComplaint = async function updateComplaint(req, res, next) {
-  try {
-    const complaint = await Complaint.findOneAndUpdate({
-      _id: req.params.id,
-      ...(res.locals.account && { account: res.locals.account }),
-    }, req.body, { runValidators: true, new: true });
-
-    if (!complaint) return res.sendStatus(status.NOT_FOUND);
-
-    res.send(complaint.toJSON());
-  } catch (err) {
-    next(err);
-  }
-};
-
 // Delete a complaint
 module.exports.deleteComplaint = async function deleteComplaint(req, res, next) {
   try {

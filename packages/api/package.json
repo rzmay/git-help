@@ -25,12 +25,14 @@
     "mongoose": "6.12.6",
     "morgan": "^1.10.0",
     "nanoid": "^3.3.4",
+    "node-fetch": "^3.3.2",
     "randexp": "^0.5.3",
     "request-ip": "3.3.0",
     "throng": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
+<<<<<<< HEAD
   },
   "main": "server.js",
   "repository": {
@@ -44,4 +46,7 @@
   },
   "homepage": "https://github.com/rzmay/git-help#readme",
   "description": ""
+=======
+  }
+>>>>>>> 7417c89f2465b4c608a9001386d897cc94ce1f7f
 }

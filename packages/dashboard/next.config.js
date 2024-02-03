@@ -3,7 +3,7 @@ const withPlugins = require('lib/helpers/withPlugins');
 const transpileModules = require('next-transpile-modules');
 
 module.exports = withPlugins([
-  transpileModules(['shared']),
+  transpileModules(['lib']),
   bundleAnalyzer({ enabled: process.env.ANALYZE === 'true' }),
 ], {
   // swcMinify: true,
