@@ -1,14 +1,15 @@
 import React from 'react';
 import useLogin from '../hooks/useLogin';
+import dayjs from 'lib/dayjs'
 
 export default function Dashboard() {
   useLogin(true);
 
   // Example data for the issues table
-  console.log('MOTLDSFJK');
   const issues = [
-    { id: 1, title: 'Issue 1', status: 'Open', priority: 'High' },
-    { id: 2, title: 'Issue 2', status: 'Closed', priority: 'Medium' },
+    { created: dayjs().format('YYYY-MM-DD'), account: "macdonalds", number: 1, status: "open", complaints: 43, title: "Problem: A big one", description: "Its just a big problem", labelsurgency: "Critical", labelstype: "Bug", labelsestimated_implementation_time: "hours", labelsimpact: "high" },
+    { created: dayjs().format('YYYY-MM-DD'), account: "macdonalds", number: 2, status: "open", complaints: 5, title: "Problem: A big one", description: "Its just a big problem", labelsurgency: "Critical", labelstype: "Bug", labelsestimated_implementation_time: "hours", labelsimpact: "high" },
+    { created: dayjs().format('YYYY-MM-DD'), account: "macdonalds", number: 3, status: "open", complaints: 32, title: "Problem: A big one", description: "Its just a big problem", labelsurgency: "Critical", labelstype: "Bug", labelsestimated_implementation_time: "hours", labelsimpact: "high" },
     // Add more issues here
   ];
 
@@ -20,19 +21,23 @@ export default function Dashboard() {
         <table className="min-w-full table-auto">
           <thead className="bg-gray-200">
             <tr>
-              <th className="px-4 py-2">ID</th>
-              <th className="px-4 py-2">Title</th>
+              <th className="px-4 py-2">Created</th>
+              <th className="px-4 py-2">Account</th>
+              <th className="px-4 py-2">Number</th>
               <th className="px-4 py-2">Status</th>
-              <th className="px-4 py-2">Priority</th>
+              <th className="px-4 py-2">Description</th>
+              <th className="px-4 py-2">Urgency</th>
+              <th className="px-4 py-2">ETOC</th>
+              <th className="px-4 py-2">Impact</th>
             </tr>
           </thead>
           <tbody>
             {issues.map((issue) => (
               <tr key={issue.id} className="border-b">
-                <td className="px-4 py-2">{issue.id}</td>
-                <td className="px-4 py-2">{issue.title}</td>
+                <td className="px-4 py-2">{issue.created}</td>
+                <td className="px-4 py-2">{issue.account}</td>
+                <td className="px-4 py-2">{issue.number}</td>
                 <td className="px-4 py-2">{issue.status}</td>
-                <td className="px-4 py-2">{issue.priority}</td>
               </tr>
             ))}
           </tbody>
