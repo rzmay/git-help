@@ -1,6 +1,14 @@
 import React from 'react';
 import useLogin from '../hooks/useLogin';
-import useAPI from '../hooks/useAPI'
+import useAPI from '../hooks/useAPI';
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue } from "@nextui-org/react";
+
+const statusColorMap = {
+  Low: "success",
+  Medium: "danger",
+  High: "warning",
+};
+
 
 export default function Dashboard() {
   useLogin();
@@ -56,6 +64,9 @@ export default function Dashboard() {
                 <td className="px-4 py-2">{issue.title}</td>
                 <td className="px-4 py-2">{issue.description}</td>
                 <td className={`px-4 py-2 ${getUrgencyColor(issue.labelsurgency)}`}>{issue.labelsurgency}</td>
+                <td><Chip className="capitalize" color={statusColorMap[issue.labelsurgency]} size="sm" variant="flat">
+                  {issue.labelsurgency}
+                </Chip></td>
                 <td className={`px-4 py-2 ${getImpactColor(issue.labelsimpact)}`}>{issue.labelsimpact}</td>
               </tr>
             ))}
