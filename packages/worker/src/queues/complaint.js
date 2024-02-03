@@ -29,15 +29,17 @@ module.exports = async function handleComplaint(job) {
       messages: [{ role: 'user', content: 'essay on why nathan is a terrible name' }],
       max_tokens: 100,
     });
-    console.log(response.choice[0].messages);
+    console.log(response);
+    console.log("Printing");
+    console.log(response.choices[0].messages);
 
     const issue = '';
 
     // Update issue for complaint
-    complaint.findByIdAndUpdate(job.id, { issue });
+    Complaint.findByIdAndUpdate(job.id, { issue });
 
     // Update complaint count and add issue update to queue
-    const i = await issue.findByIdAndUpdate(issue, { $inc: { complaints: 1 } });
+    const i = await Issue.findByIdAndUpdate(issue, { $inc: { complaints: 1 } });
     await issueQueue.add(i.toJSON(), {
       removeOnComplete: true,
       removeOnFail: true,
