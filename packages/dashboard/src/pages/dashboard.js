@@ -23,7 +23,7 @@ export default function Dashboard() {
             </tr>
           </thead>
           <tbody>
-            {issues.map(issue => (
+            {issues.map((issue) => (
               <tr key={issue.id} className="border-b">
                 <td className="px-4 py-2">{issue.id}</td>
                 <td className="px-4 py-2">{issue.title}</td>
