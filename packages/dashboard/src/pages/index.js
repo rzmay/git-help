@@ -1,9 +1,8 @@
-import Link from 'next/link';
-import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import React from 'react';
 
-const OrangeButton = ({ text, link }) => {
+function OrangeButton({ text, link }) {
   const router = useRouter();
 
   const buttonStyle = {
@@ -20,13 +19,11 @@ const OrangeButton = ({ text, link }) => {
   };
 
   return (
-    <button style={buttonStyle} onClick={handleButtonClick}>
+    <button type="button" style={buttonStyle} onClick={handleButtonClick}>
       {text}
     </button>
   );
-};
-
-
+}
 
 export default function TitleImageLayout() {
   return (

@@ -17,8 +17,8 @@ module.exports = withPlugins([
       { hostname: 'www.gravatar.com' },
       { hostname: 'lh3.googleusercontent.com' },
       { hostname: 'i.seadn.io' },
-      { hostname: 'i.imgur.com' }
-    ]
+      { hostname: 'i.imgur.com' },
+    ],
   },
   async rewrites() {
     return [

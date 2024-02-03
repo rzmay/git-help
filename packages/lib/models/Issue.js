@@ -1,13 +1,13 @@
-const Queue = require('bull');
-const dayjs = require('lib/dayjs');
+// const Queue = require('bull');
+// const dayjs = require('lib/dayjs');
 const { nanoid } = require('nanoid');
 const getGitHubPayload = require('../helpers/getGithubPayload');
 const mongoose = require('../mongoose');
 const { updateIssue } = require('../services/github.service');
 const Account = require('./Account');
-const Complaint = require('./Complaint');
+// const Complaint = require('./Complaint');
 
-const issueQueue = new Queue('issue', process.env.REDIS_URL);
+// const issueQueue = new Queue('issue', process.env.REDIS_URL);
 
 const issueSchema = new mongoose.Schema({
   _id: {
@@ -85,15 +85,13 @@ issueSchema.post('findOneAndUpdate', async (issue) => {
 
   const account = await Account.findById(issue.account);
 
-  const res = await updateIssue(
+  await updateIssue(
     issue.number,
     await getGitHubPayload(issue),
     account.settings.github_owner,
     account.settings.github_repository,
     account.settings.github_token,
   );
-
-  console.log(res);
 });
 
 module.exports = mongoose.models.Issue || mongoose.model('Issue', issueSchema);

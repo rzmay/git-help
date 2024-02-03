@@ -11,7 +11,6 @@ export default function useLogin(requireAccount) {
       router.push('/login');
     }
 
-    console.log(user);
     if (user && requireAccount && !user.accounts?.length) {
       router.push('/onboarding');
     }

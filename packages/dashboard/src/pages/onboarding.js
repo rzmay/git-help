@@ -23,7 +23,6 @@ export default function Onboarding() {
   const { data: account } = useAccount();
 
   React.useEffect(() => {
-    console.log(account);
     if (account) router.push('/quickstart');
   }, [account, router]);
 

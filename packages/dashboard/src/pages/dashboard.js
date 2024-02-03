@@ -1,14 +1,12 @@
+import dayjs from 'lib/dayjs';
 import React from 'react';
+import useAPI from '../hooks/useAPI';
 import useLogin from '../hooks/useLogin';
-import useAPI from '../hooks/useAPI'
-import dayjs from 'lib/dayjs'
 
 export default function Dashboard() {
   useLogin();
 
-  const { data: issues, error, loading } = useAPI('/v1/issues',);
-
-  console.log(issues);
+  const { data: issues, error, loading } = useAPI('/v1/issues');
 
   if (loading) return <div>Please login before accessing the dashboard</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -69,7 +67,7 @@ export default function Dashboard() {
           <tbody>
             {issues.map((issue) => (
               <tr key={issue.id} className="border-b">
-                <td className="px-4 py-2">{dayjs(issue.created).format("LLL")}</td>
+                <td className="px-4 py-2">{dayjs(issue.created).format('LLL')}</td>
                 <td className="px-4 py-2">{issue.number}</td>
                 <td className="px-4 py-2">{issue.complaints}</td>
                 <td className="px-4 py-2">{issue.title}</td>
