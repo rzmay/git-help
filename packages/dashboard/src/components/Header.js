@@ -1,5 +1,4 @@
 import logo from '../images/GitHelp.png';
-import dashboard from '../pages/dashboard';
 import Link from 'next/link'
 
 export default function Header() {
