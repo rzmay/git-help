@@ -2,6 +2,13 @@ import React from 'react';
 import useLogin from '../hooks/useLogin';
 import useAPI from '../hooks/useAPI'
 import dayjs from 'lib/dayjs'
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip, getKeyValue } from "@nextui-org/react";
+
+const statusColorMap = {
+  active: "success",
+  paused: "danger",
+  vacation: "warning",
+};
 
 export default function Dashboard() {
   useLogin();
@@ -15,19 +22,19 @@ export default function Dashboard() {
 
   const getImpactColor = (impact) => {
     switch (impact) {
-      case 'wide': return 'text-red-600';
-      case 'medium': return 'text-yellow-600';
-      case 'minimal': return 'text-green-600';
+      case 'wide': return 'text-red-500';
+      case 'medium': return 'text-yellow-400';
+      case 'minimal': return 'text-green-500';
       default: return 'text-gray-600';
     }
   };
 
   const getUrgencyColor = (urgency) => {
     switch (urgency) {
-      case 'critical': return 'text-red-600';
+      case 'critical': return 'text-red-500';
       case 'high': return 'text-orange-600';
-      case 'medium': return 'text-yellow-600';
-      case 'low': return 'text-green-600';
+      case 'medium': return 'text-yellow-400';
+      case 'low': return 'text-green-500';
       default: return 'text-gray-600';
     }
   };
@@ -55,7 +62,7 @@ export default function Dashboard() {
       <h1 className="text-2xl font-bold mb-4">Welcome to the Dashboard</h1>
       <div className="overflow-x-auto">
         <table className="min-w-full table-auto">
-          <thead className="bg-gray-200">
+          <thead className="bg-gray-100">
             <tr>
               <th className="px-4 py-2">Created</th>
               <th className="px-4 py-2 ">Number</th>
@@ -68,8 +75,8 @@ export default function Dashboard() {
           </thead>
           <tbody>
             {issues.map((issue) => (
-              <tr key={issue.id} className="border-b">
-                <td className="px-4 py-2">{dayjs(issue.created).format("LLL")}</td>
+              <tr key={issue.id} className="border-b hover:bg-gray-50">
+                <td className="px-4 py-2 ">{dayjs(issue.created).format("LLL")}</td>
                 <td className="px-4 py-2">{issue.number}</td>
                 <td className="px-4 py-2">{issue.complaints}</td>
                 <td className="px-4 py-2">{issue.title}</td>
