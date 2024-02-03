@@ -1,15 +1,21 @@
+import dayjs from 'lib/dayjs';
 import React from 'react';
 import useLogin from '../hooks/useLogin';
-import dayjs from 'lib/dayjs'
 
 export default function Dashboard() {
   useLogin(true);
 
   // Example data for the issues table
   const issues = [
-    { created: dayjs().format('YYYY-MM-DD'), account: "macdonalds", number: 1, status: "open", complaints: 43, title: "Problem: A big one", description: "Its just a big problem", labelsurgency: "Critical", labelstype: "Bug", labelsestimated_implementation_time: "hours", labelsimpact: "high" },
-    { created: dayjs().format('YYYY-MM-DD'), account: "macdonalds", number: 2, status: "open", complaints: 5, title: "Problem: A big one", description: "Its just a big problem", labelsurgency: "Critical", labelstype: "Bug", labelsestimated_implementation_time: "hours", labelsimpact: "high" },
-    { created: dayjs().format('YYYY-MM-DD'), account: "macdonalds", number: 3, status: "open", complaints: 32, title: "Problem: A big one", description: "Its just a big problem", labelsurgency: "Critical", labelstype: "Bug", labelsestimated_implementation_time: "hours", labelsimpact: "high" },
+    {
+      created: dayjs().format('YYYY-MM-DD'), account: 'macdonalds', number: 1, status: 'open', complaints: 43, title: 'Problem: A big one', description: 'Its just a big problem', labelsurgency: 'Critical', labelstype: 'Bug', labelsestimated_implementation_time: 'hours', labelsimpact: 'high',
+    },
+    {
+      created: dayjs().format('YYYY-MM-DD'), account: 'macdonalds', number: 2, status: 'open', complaints: 5, title: 'Problem: A big one', description: 'Its just a big problem', labelsurgency: 'Critical', labelstype: 'Bug', labelsestimated_implementation_time: 'hours', labelsimpact: 'high',
+    },
+    {
+      created: dayjs().format('YYYY-MM-DD'), account: 'macdonalds', number: 3, status: 'open', complaints: 32, title: 'Problem: A big one', description: 'Its just a big problem', labelsurgency: 'Critical', labelstype: 'Bug', labelsestimated_implementation_time: 'hours', labelsimpact: 'high',
+    },
     // Add more issues here
   ];
 

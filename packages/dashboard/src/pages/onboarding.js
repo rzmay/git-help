@@ -57,9 +57,17 @@ export default function Onboarding() {
           <Formik
             initialValues={{
               name: '',
+              settings: {
+                github_owner: '',
+                github_repository: '',
+              },
             }}
             validationSchema={Yup.object().shape({
-              name: Yup.string().required('Please enter an account name.'),
+              name: Yup.string().required('Please enter an account name.').trim(),
+              settings: Yup.object().shape({
+                github_owner: Yup.string().required('Please enter your username.').trim(),
+                github_repository: Yup.string().required('Please enter a repository.').trim(),
+              }).required(),
             })}
             onSubmit={handleSubmit}
             validateOnMount
@@ -70,22 +78,42 @@ export default function Onboarding() {
               dirty, isValid, isSubmitting,
             }) => (
               <Form>
-                <Label for="name">What's your website's name?</Label>
-                <Field
-                  as={Input}
-                  name="name"
-                  placeholder="Potato Shop"
-                />
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full group mt-5"
-                  variant="dark"
-                  disabled={!dirty || !isValid}
-                  loading={isSubmitting}
-                >
-                  Get Started
-                </Button>
+                <div className="space-y-5">
+                  <div>
+                    <Label for="name">What's your website's name?</Label>
+                    <Field
+                      as={Input}
+                      name="name"
+                      placeholder="Potato Shop"
+                    />
+                  </div>
+                  <div>
+                    <Label for="settings.github_owner">What's your github username?</Label>
+                    <Field
+                      as={Input}
+                      name="settings.github_owner"
+                      placeholder="rzmay"
+                    />
+                  </div>
+                  <div>
+                    <Label for="settings.github_repository">What repository are you installing GitHelp on?</Label>
+                    <Field
+                      as={Input}
+                      name="settings.github_repository"
+                      placeholder="git-help"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full group"
+                    variant="dark"
+                    disabled={!dirty || !isValid}
+                    loading={isSubmitting}
+                  >
+                    Get Started
+                  </Button>
+                </div>
               </Form>
             )}
           </Formik>

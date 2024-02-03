@@ -4,11 +4,11 @@ const Account = require('lib/models/Account');
 
 const router = express.Router();
 
-router.post('/webhook', async (req, res, next) => {
+router.get('/callback', async (req, res, next) => {
   try {
-    const { code, repository, owner, state } = req.query;
+    const { code, state } = req.query;
 
-    if (!code) return res.sendStatus(status.BAD_REQUEST);
+    if (!code || !state) return res.sendStatus(status.BAD_REQUEST);
 
     // Exchange the code for an access token using fetch
     const response = await fetch('https://github.com/login/oauth/access_token', {
@@ -27,11 +27,7 @@ router.post('/webhook', async (req, res, next) => {
     const { access_token: accessToken } = await response.json();
 
     // Ladies and gentlemen, we got em
-    await Account.findByIdAndUpdate(state, {
-      'settings.github_token': accessToken,
-      'settings.github_repository': repository,
-      'settings.github_owner': owner,
-    });
+    await Account.findByIdAndUpdate(state, { 'settings.github_token': accessToken });
 
     res.redirect(`${process.env.DASHBOARD_BASE_URL}/`);
   } catch (err) {
