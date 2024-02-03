@@ -20,7 +20,7 @@ module.exports.retrieveUser = async function retrieveUser(req, res, next) {
 module.exports.updateUser = async function updateUser(req, res, next) {
   try {
     const user = await User.findOneAndUpdate({
-      _id: req.params.id
+      _id: req.params.id,
     }, req.body, { runValidators: true, new: true });
 
     if (!user) return res.sendStatus(status.NOT_FOUND);
