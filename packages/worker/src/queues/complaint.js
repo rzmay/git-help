@@ -1,6 +1,9 @@
+const Queue = require('bull');
 const Account = require('lib/models/Account');
 const Complaint = require('lib/models/Complaint');
 const Issue = require('lib/models/Issue');
+
+const issueQueue = new Queue('issue', process.env.REDIS_URL);
 
 module.exports = async function handleIssue(job) {
   console.log(`Handling issue: ${job.id}`);
@@ -15,14 +18,19 @@ module.exports = async function handleIssue(job) {
       account: account.id,
     });
 
-    // Call openAI, categorize complaint into issue or create new
+    // Call openAI, categorize complaint into issue OR create new
     const issue = '';
 
     // Update issue for complaint
     complaint.findByIdAndUpdate(job.id, { issue });
 
-    // Update complaint by for issue
-    issue.findByIdAndUpdate(issue, { $inc: { complaints: 1 } });
+    // Update complaint count and add issue update to queue
+    const i = await issue.findByIdAndUpdate(issue, { $inc: { complaints: 1 } });
+    await issueQueue.add(i.toJSON(), {
+      removeOnComplete: true,
+      removeOnFail: true,
+      jobId: this.id,
+    });
   } catch (err) {
     console.log(err);
   }

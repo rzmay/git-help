@@ -5,7 +5,28 @@ const embed = require('../middlewares/embed');
 
 const router = express.Router();
 
-router.get('/embed/issues', embed(), async (req, res, next) => {
+router.get('/', async (req, res, next) => {
+  try {
+    const { key } = req.query;
+
+    // Generate the js...
+    const jsPlaceholder = '';
+
+    res.send(jsPlaceholder);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/css', async (req, res, next) => {
+  try {
+    res.sendFile('../embed/embed.css');
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/issues', embed(), async (req, res, next) => {
   try {
     const issues = await Issue
       .find({ account: res.locals.account.id })
@@ -18,7 +39,7 @@ router.get('/embed/issues', embed(), async (req, res, next) => {
   }
 });
 
-router.post('/embed/complaint', embed(), async (req, res, next) => {
+router.post('/complaint', embed(), async (req, res, next) => {
   try {
     const complaint = await Complaint.create({
       ...req.body,
