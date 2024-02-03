@@ -1,4 +1,3 @@
-// import dayjs from 'lib/dayjs';
 import React from 'react';
 import useLogin from '../hooks/useLogin';
 import useAPI from '../hooks/useAPI'
@@ -6,7 +5,7 @@ import useAPI from '../hooks/useAPI'
 export default function Dashboard() {
   useLogin();
 
-  const { data: issues, error, loading } = useAPI('/issues',);
+  const { data: issues, error, loading } = useAPI('/v1/issues',);
 
   console.log(issues);
 
