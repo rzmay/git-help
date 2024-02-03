@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complaint Box</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #logo-container {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(100%);
+      padding: 10px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    #complaint-box {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
+
+    #complaint-box textarea {
+      width: 100%;
+      height: 100px;
+      resize: none;
+      margin-bottom: 10px;
+    }
+
+    #close-btn {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="logo-container" onclick="toggleComplaintBox()">
+    <img src="GitHelp.png" alt="Your Logo" width="30" height="30">
+  </div>
+
+  <div id="complaint-box">
+    <h2>Submit a Complaint</h2>
+    <textarea placeholder="Type your complaint here..."></textarea>
+    <button id="close-btn" onclick="toggleComplaintBox()">Close</button>
+  </div>
+
+  <script>
+    function toggleComplaintBox() {
+      const logoContainer = document.getElementById('logo-container');
+      const complaintBox = document.getElementById('complaint-box');
+
+      if (complaintBox.style.display === 'none' || complaintBox.style.display === '') {
+        logoContainer.style.opacity = '0';
+        setTimeout(() => {
+          logoContainer.style.display = 'none';
+          complaintBox.style.display = 'block';
+        }, 300);
+      } else {
+        logoContainer.style.display = 'block';
+        setTimeout(() => {
+          logoContainer.style.opacity = '1';
+          complaintBox.style.display = 'none';
+        }, 50);
+      }
+    }
+  </script>
+
+</body>
+</html>
