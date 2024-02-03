@@ -1,10 +1,8 @@
 const bundleAnalyzer = require('@next/bundle-analyzer');
 const withPlugins = require('lib/helpers/withPlugins');
-const transpileModules = require('next-transpile-modules');
+// const transpileModules = require('next-transpile-modules');
 
-module.exports = withPlugins([
-  transpileModules(['lib']),
-  bundleAnalyzer({ enabled: process.env.ANALYZE === 'true' }),
+module.exports = withPlugins([  bundleAnalyzer({ enabled: process.env.ANALYZE === 'true' }),
 ], {
   // swcMinify: true,
   poweredByHeader: false,

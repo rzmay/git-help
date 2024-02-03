@@ -32,21 +32,5 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
-<<<<<<< HEAD
-  },
-  "main": "server.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rzmay/git-help.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rzmay/git-help/issues"
-  },
-  "homepage": "https://github.com/rzmay/git-help#readme",
-  "description": ""
-=======
   }
->>>>>>> 7417c89f2465b4c608a9001386d897cc94ce1f7f
 }
