@@ -1,7 +1,7 @@
 const express = require('express');
+const mongoose = require('lib/mongoose');
+const redis = require('lib/redis');
 const morgan = require('morgan');
-const mongoose = require('shared/lib/mongoose');
-const redis = require('shared/lib/redis');
 const throng = require('throng');
 const errorHandler = require('./src/middlewares/errorHandler');
 
@@ -28,7 +28,6 @@ async function start() {
   app.use('/healthcheck', require('./src/routes/health'));
   app.use('/', require('./src/routes/index'));
 
-  if (!dev) app.use(Sentry.Handlers.errorHandler());
   app.use(errorHandler);
 
   app.listen(port, (err) => {

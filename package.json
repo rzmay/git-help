@@ -27,5 +27,17 @@
   },
   "dependencies": {
     "core-js": "^3.24.0"
-  }
+  },
+  "description": "",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rzmay/git-help.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rzmay/git-help/issues"
+  },
+  "homepage": "https://github.com/rzmay/git-help#readme"
 }

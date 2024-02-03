@@ -7,6 +7,5 @@ module.exports = async function issueBacklog(message) {
     // Update issues from backlog here
   } catch (err) {
     if (process.env.DEBUG) console.log(err);
-    Sentry.captureException(err);
   }
 };
