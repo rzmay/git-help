@@ -30,23 +30,6 @@
     "throng": "^5.0.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "nodemon": "^3.0.3"
   }
-=======
-    "nodemon": "^2.0.19"
-  },
-  "main": "server.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rzmay/git-help.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rzmay/git-help/issues"
-  },
-  "homepage": "https://github.com/rzmay/git-help#readme",
-  "description": ""
->>>>>>> 7b5eafb2550e155c5e635a1490206fcfea056e43
 }

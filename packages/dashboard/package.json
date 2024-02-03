@@ -55,27 +55,8 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^12.3.4",
     "@tailwindcss/forms": "^0.5.2",
-<<<<<<< HEAD
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1"
   }
-=======
-    "autoprefixer": "^10.4.12",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.5"
-  },
-  "main": "next.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rzmay/git-help.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rzmay/git-help/issues"
-  },
-  "homepage": "https://github.com/rzmay/git-help#readme",
-  "description": ""
->>>>>>> 7b5eafb2550e155c5e635a1490206fcfea056e43
 }

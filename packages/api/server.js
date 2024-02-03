@@ -24,6 +24,7 @@ async function start() {
 
   // Set up routers
   app.use('/auth', require('./src/routes/auth'));
+  app.use('/auth', require('./src/routes/embed'));
   app.use('/dashboard', require('./src/routes/dashboard'));
   app.use('/healthcheck', require('./src/routes/health'));
   app.use('/', require('./src/routes/index'));
