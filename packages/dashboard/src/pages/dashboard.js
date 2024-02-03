@@ -1,6 +1,9 @@
 import React from 'react';
+import useLogin from '../hooks/useLogin';
 
 export default function Dashboard() {
+  useLogin();
+
   // Example data for the issues table
   console.log('MOTLDSFJK');
   const issues = [
