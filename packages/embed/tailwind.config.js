@@ -6,7 +6,6 @@ module.exports = {
   content: [
     './src/pages/**/*.js',
     './src/components/**/*.js',
-    './src/layouts/*.js',
     '../shared/components/**/*.js',
   ],
   safelist: ['reveal'],
